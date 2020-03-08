@@ -1,0 +1,30 @@
+#git学习笔记
+##git作用
+  git通常在编程中会用到，通常是多个人同时协作一个项目，有可能出现两个人同时修改一个文件，
+  这时后提交的人会遇到冲突，需要解决冲突；git能够记录每个人的提交修改等形成日志，可以根
+  据提交记录进行回滚；并且git支持分布式部署。
+##git工作流程
+  克隆 Git 资源作为工作目录。
+  在克隆的资源上添加或修改文件。
+  如果其他人修改了，你可以更新资源。
+  在提交前查看修改。
+  提交修改。
+  在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。
+##git实操
+###一.上传本地文件到github
+*1.创建一个本地项目*
+  创建文件
+  在git bash输入目录   比如：$  cd d：   $  cd repository/-A---
+*2.建立本地仓库*
+  git init   //将本地项目目录变成git可以管理的仓库
+  git add .  //更行目录，把当前目录下所有未追踪的文件全部add
+  git commit -m"message"  //将文件提交到仓库，message是传送的备注
+*3.关联GitHub仓库*
+  复制仓库的SSH，执行指令 git remote add origin git@github.com:yagamilaiduo/-A---.git(从仓库复制来的SSH)
+*4.上传本地文件*
+   git push -u origin master  //将本地库的所有内容都推送到远程库上
+####遇到的问题
+*问题*
+git push -u origin master 指令执行时，出现fatal: Could not read from remote repository.错误
+*解决*
+搜索器搜索，最后发现成功的解决方案：关联GitHub仓库时，改用$ git remote set-url origin
