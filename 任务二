@@ -28,3 +28,9 @@
 git push -u origin master 指令执行时，出现fatal: Could not read from remote repository.错误
 *解决*
 搜索器搜索，最后发现成功的解决方案：关联GitHub仓库时，改用$ git remote set-url origin
+
+###二.添加文件
+执行指令添加文件->提交文件->推送文件
+git add .
+git commit -m "任务二"
+git push -u origin master

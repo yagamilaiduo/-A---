@@ -1,0 +1,177 @@
+# C学习笔记
+*2020三月第二周*
+##数据结构与算法
+*意识到了数据结构与算法的重要性，开始学习*
+###数据结构
+刚听完陈越姥姥的第一节
+###算法
+1.算法复杂度：空间复杂度和时间复杂度
+2.渐进表示法：上界，下界；串联取最大；嵌套相乘；循环，循环次数×循环体复杂程度；
+if——else，总体复杂度取最大；三个规则：常熟1取代运行时间中的所有加法常熟，只保留最高阶项，去除最高阶的常数
+3.最大子列和问题：
+算法一，穷举——T（N）=N^3
+算法二，部分储存中间的穷举——T(N)=N^2;
+算法三，分而治之——T=O(NLogN)，步骤：第一步，从中分；第二步，递归求左右两子列最大和；第三步，
+找出跨分界线的最大子列和；第四步，取三个子列中最大的
+算法四,在线处理——T=O(N),从开头递加，如果大于ThisSum，更行它，如果为负数，开始一个新的
+
+##遇到问题
+看到浙大数据结构的第二章，线性链表的储存结构那，发现自己对链表的概念不清晰，于是又反回去恶补链表
+
+##解决方案
+###这个简单链表的构成：
+头指针(Header)，若干个节点(节点包括了数据域和指针域)，最后一个节点要指向空。
+实现原理：头指针指向链表的第一个节点，然后第一个节点中的指针指向下一个节点，然后依次指到最后一个节点，
+这样就构成了一条链表。
+###创建多列表节点
+####创建链表
+
+typedef struct student{
+
+	int score;
+
+	struct student *next;
+
+} LinkList;
+
+####初始化一个链表，n为链表节点个数。
+
+LinkList *creat(int n){
+
+	LinkList *head, *node, *end;//定义头节点，普通节点，尾部节点；
+
+	head = (LinkList*)malloc(sizeof(LinkList));//分配地址
+
+	end = head;         //若是空链表则头尾节点一样
+
+	for (int i = 0; i < n; i++) {
+
+		node = (LinkList*)malloc(sizeof(LinkList));
+
+		scanf("%d", &node->score);
+
+		end->next = node;
+
+		end = node;
+
+	}
+
+	end->next = NULL;//结束创建
+
+	return head;
+
+}
+
+####修改链表节点值
+
+void change(LinkList *list,int n) {//n为第n个节点
+
+	LinkList *t = list;
+
+	int i = 0;
+
+	while (i < n && t != NULL) {
+
+		t = t->next;
+
+		i++;
+
+	}
+
+	if (t != NULL) {
+
+		puts("输入要修改的值");
+
+		scanf("%d", &t->score);
+
+	}
+
+	else {
+
+		puts("节点不存在");
+
+	}
+
+}
+
+####删除链表节点
+
+void delet(LinkList *list, int n) {
+
+	LinkList *t = list, *in;
+
+	int i = 0;
+
+	while (i < n && t != NULL) {
+
+		in = t;
+
+		t = t->next;
+
+		i++;
+
+	}
+
+	if (t != NULL) {
+
+		in->next = t->next;
+
+		free(t);
+
+	}
+
+	else {
+
+		puts("节点不存在");
+
+	}
+
+}
+
+####插入链表节点
+
+void insert(LinkList *list, int n) {
+
+	LinkList *t = list, *in;
+
+	int i = 0;
+
+	while (i < n && t != NULL) {
+
+		t = t->next;
+
+		i++;
+
+	}
+
+	if (t != NULL) {
+
+		in = (LinkList*)malloc(sizeof(LinkList));
+
+		puts("输入要插入的值");
+
+		scanf("%d", &in->score);
+
+		in->next = t->next;//填充in节点的指针域，也就是说把in的指针域指向t的下一个节点
+
+		t->next = in;//填充t节点的指针域，把t的指针域重新指向in
+
+	}
+
+	else {
+
+		puts("节点不存在");
+
+	}
+
+}
+
+####输出链表
+
+        while (h->next != NULL) {
+
+		h = h->next;
+
+		printf("%d  ", h->score);
+
+	}
